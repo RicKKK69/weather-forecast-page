@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/16/414/414825.png" type="image/png" />
+  <title>Weather Report & Forecast</title>
+
+  <!-- Fonts & Chart -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="title">Local Weather Report & Forecast</div>
+    <div class="search">
+      <input id="searchInput" type="text" placeholder="Search location"/>
+      <button id="searchBtn">Search</button>
+
+      <!-- Theme Toggle Button -->
+      <!-- <button class="theme-toggle" id="theme-toggle" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+        <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+          <mask class="moon" id="moon-mask">
+            <rect x="0" y="0" width="100%" height="100%" fill="white" />
+            <circle cx="24" cy="10" r="6" fill="black" />
+          </mask>
+          <circle class="sun" cx="12" cy="12" r="6" mask="url(#moon-mask)" fill="currentColor" />
+          <g class="sun-beams" stroke="currentColor">
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+           </g>
+        </svg>
+      </button> -->
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside>
+      <div class="sb-title">State & Cities</div>
+      <ul class="accordion" id="stateList">
+        <!-- Filled by JS -->
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main>
+      <div class="row">
+        <div class="card grid-5">
+          <div class="chip" id="cityChip">—</div>
+          <div class="sub" id="dateChip">—</div>
+          <div class="stats" id="overviewStats"></div>
+        </div>
+
+        <div class="card grid-3">
+          <div class="sub">Sunset (Today)</div>
+          <div class="big"><h2 id="sunset">—</h2></div>
+          <div class="sub" style="margin-top:12px">Sunrise (Tomorrow)</div>
+          <div class="big"><h2 id="sunriseTomorrow">—</h2></div>
+        </div>
+
+        <div class="card grid-4">
+          <div class="sub">Local Time</div>
+          <div class="big"><h2 id="moonrise">—</h2></div>
+          <div class="sub" style="margin-top:12px">Weather</div>
+          <div class="big"><h2 id="moonset">—</h2></div>
+        </div>
+      </div>
+
+      <!-- Forecast & Toggles -->
+      <div class="card">
+        <div class="section-title">Forecast</div>
+        <div id="forecastControls">
+          <button id="toggleUnit">Show °F</button>
+          <button id="toggleView">Show Hourly</button>
+        </div>
+        <div class="forecast" id="forecast"></div>
+      </div>
+
+      <!-- Chart -->
+      <div class="card">
+        <div class="chart-title">Max & Min Temperature Trend</div>
+        <canvas id="tempChart"></canvas>
+      </div>
+
+      <div class="footer">© 2025. All rights reserved.</div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+
+  <script>
+    // ==== DARK MODE TOGGLE ====
+    document.documentElement.dataset.theme = "light"; // default
+
+    const themeBtn = document.getElementById("theme-toggle");
+    themeBtn.addEventListener("click", () => {
+      const currentTheme = document.documentElement.dataset.theme;
+      document.documentElement.dataset.theme = currentTheme === "dark" ? "light" : "dark";
+    });
+  </script>
+</body>
+</html>
